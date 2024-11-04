@@ -8,13 +8,20 @@ Reference for using `pandas` on the cluster: [cudf.pandas](https://github.com/ra
 `EDA.ipynb`  
 Exploratory Data Analysis step
 
-`DataPP.ipynb`  
+`DataPP.ipynb` (incomplete)  
 Preprocessing Steps  
-*Note that we have gotten a head start on the preprocessing for milestone 3 already, but here's our preprocessing plan/outline:*
+*Note that we have gotten a little head start on the preprocessing for milestone 3 already, but here's our preprocessing plan/outline:*
 
-Our data from the Child Mind Institue contains some sort of null data in every row. Therefore, we are planning to drop a column if it contains more than 50% null data.
-To address the remaining null values, we will use imputing to insert random values based on the existing values in the particular column. 
+The dataset is strange in the fact that a lot of the measured values are 0 when they shouldn't be. A child that weighs 0 does not exist, so we assume that the data recorder put a 0 in some places when they should've put NaN. In other words, for some of the columns, we'll have to replace 0 with NaN.
 
-Judging from our scatter plots of the data, the data is not normally distributed, therefore we are opting for data normalization instead of standardization.
+It's also worthy to note that the dataset contains some sort of null data in every row. In other words, if we just do df.dropna(), the entire dataset gets dropped. 
+To help mitigate this issue, we are planning to drop a column if it contains more than 50% null data.
 
-Lastly, for the columns that contain seasonal data, we will use one hot encoding to transform the cateogrical data into numerical data. 
+There are also a lot of outliers for each column, so we are planning to remove rows if they have an outlier.
+
+To address the remaining missing values, we will use imputing to insert random values based on the existing values in the particular column. 
+
+We will also scale our data.  
+Judging from the histograms of the data, most of the data is not normally distributed, therefore we are opting for min-max normalization instead of standardization.
+
+Lastly, for the columns that contain seasonal data (which is categorical), we will use one hot encoding to transform the cateogrical data into numerical data. 
