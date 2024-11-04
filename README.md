@@ -1,6 +1,7 @@
 # Problematic-Internet-Use-Predictor
 
-Download of the data can be done at this [Kaggle competition](https://www.kaggle.com/competitions/child-mind-institute-problematic-internet-use/data)
+Download of the data can be done at this [Kaggle competition](https://www.kaggle.com/competitions/child-mind-institute-problematic-internet-use/data).  
+*Note that, per the competition rules, we cannot publish the dataset on this repo or in our notebooks, so the grader will have to join the competition to get access to the 6GB dataset.*
 
 Reference for using `pandas` on the cluster: [cudf.pandas](https://github.com/rapidsai/cudf)
 
