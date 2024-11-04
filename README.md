@@ -8,8 +8,9 @@ Reference for using `pandas` on the cluster: [cudf.pandas](https://github.com/ra
 `EDA.ipynb`  
 Exploratory Data Analysis step
 
-
-Preprocessing Steps
+`DataPP.ipynb`  
+Preprocessing Steps  
+*Note that we have gotten a head start on the preprocessing for milestone 3 already, but here's our preprocessing plan/outline:*
 
 Our data from the Child Mind Institue contains some sort of null data in every row. Therefore, we are planning to drop a column if it contains more than 50% null data.
 To address the remaining null values, we will use imputing to insert random values based on the existing values in the particular column. 
