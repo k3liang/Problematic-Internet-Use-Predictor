@@ -9,7 +9,7 @@ Reference for using `pandas` on the cluster: [cudf.pandas](https://github.com/ra
 `DataExploration.ipynb`  
 Exploratory Data Analysis step
 
-`DataPP.ipynb`
+`DataPP.ipynb`  
 Preprocessing Steps  
 *Here's our preprocessing plan/outline from Milestone 2, which we implemented in Milestone 3*
 
