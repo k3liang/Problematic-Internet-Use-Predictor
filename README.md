@@ -37,6 +37,6 @@ We are thinking of using polynonmial regression for the future because it would 
  
 
 ### Question: What is the conclusion of your 1st model? What can be done to possibly improve it?
-The conclusion of our first model with ridge regression was that with an alpha of 1000, we had the most optimal cross validation value and lowest testing error. 
+The conclusion of our first model with ridge regression was that with an alpha of 1000, we had the most optimal cross validation value and lowest testing error. This value of alpha is quite high which indicates there is a severe penalty on the large coefficients or that there is a very strong "smoothing" effect on the regression coefficients to prevent overfitting. 
 
 
