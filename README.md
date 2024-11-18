@@ -32,9 +32,9 @@ answer: The graph comparing training and testing MSEs across alphas for Ridge Re
 
 ### Question: What are the next models you are thinking of and why?
 We are thinking of using polynonmial regression for the future because it would increase model complexity. This would prevent any potential underfitting.
-
+ 
 
 ### Question: What is the conclusion of your 1st model? What can be done to possibly improve it?
-
+The conclusion of our first model with ridge regression was that with an alpha of 1000, we had the most optimal cross validation value and lowest testing error. 
 
 
