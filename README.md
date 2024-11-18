@@ -30,3 +30,11 @@ Lastly, for the columns that contain seasonal data (which is categorical), we wi
 answer: The graph comparing training and testing MSEs across alphas for Ridge Regression shows that the testing MSE is consistently higher than the training MSE, as expected. The training error decreases as alpha decreases, and at very low alpha values  (alpha < 10^-2 ), the training error becomes very low, indicating potential overfitting. Conversely, at very high alpha values, the training error increases, suggesting that the model is underfitting due to excessive regularization. The testing error initially decreases as alpha decreases but stabilizes at around alpha < 10^0. The best alpha is alpha = 1000, where the testing error is at its minimum, indicating the model generalizes well and achieves the optimal trade-off between bias and variance. In conclusion, the model fits best at alpha = 1000, as it minimizes the testing error and ensures strong generalization. 
 ![Alt text](ridgeregression.png)
 
+### Question: What are the next models you are thinking of and why?
+We are thinking of using polynonmial regression for the future because it would increase model complexity. This would prevent any potential underfitting.
+
+
+### Question: What is the conclusion of your 1st model? What can be done to possibly improve it?
+
+
+
