@@ -24,4 +24,9 @@ To address the remaining missing values, we will use imputing to insert random v
 We will also scale our data.  
 Judging from the histograms of the data, most of the data is not normally distributed, therefore we are opting for min-max normalization instead of standardization.
 
-Lastly, for the columns that contain seasonal data (which is categorical), we will use one hot encoding to transform the cateogrical data into numerical data. 
+Lastly, for the columns that contain seasonal data (which is categorical), we will use one hot encoding to transform the categorical data into numerical data. 
+
+### Question: Where does our data fit in the fitting graph?
+answer: The graph comparing training and testing MSEs across alphas for Ridge Regression shows that the testing MSE is consistently higher than the training MSE, as expected. The training error decreases as alpha decreases, and at very low alpha values  (alpha < 10^-2 ), the training error becomes very low, indicating potential overfitting. Conversely, at very high alpha values, the training error increases, suggesting that the model is underfitting due to excessive regularization. The testing error initially decreases as alpha decreases but stabilizes at around alpha < 10^0. The best alpha is alpha = 1000, where the testing error is at its minimum, indicating the model generalizes well and achieves the optimal trade-off between bias and variance. In conclusion, the model fits best at alpha = 1000, as it minimizes the testing error and ensures strong generalization. 
+![Alt text](ridgeregression.png)
+
