@@ -43,6 +43,6 @@ We are also considering using support vector machines, since those are best used
 ### Question: What is the conclusion of your 1st model? What can be done to possibly improve it?
 The conclusion of our first model with ridge regression was that with an alpha of 1000, we had the most optimal cross validation value and lowest testing error. This value of alpha is quite high which indicates there is a severe penalty on the large coefficients shrinking them towards zero or that there is a very strong "smoothing" effect on the regression coefficients to prevent overfitting. We can improve the linear model by adding transformed features through techniques like polynomial regression.
 
-
+Examples for Prediction, Validation, Test: Ground Truth - [0, 1, 2, 3], Predictions - [0,1,2,3]
 
 
