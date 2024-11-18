@@ -16,7 +16,7 @@ Preprocessing Steps
 The dataset is strange in the fact that a lot of the measured values are 0 when they shouldn't be. A child that weighs 0 does not exist, so we assume that the data recorder put a 0 in some places when they should've put NaN. In other words, for some of the columns, we'll have to replace 0 with NaN.
 
 It's also worthy to note that the dataset contains some sort of null data in every row. In other words, if we just do df.dropna(), the entire dataset gets dropped. 
-To help mitigate this issue, we are planning to drop a column if it contains more than 50% null data.
+To help mitigate this issue, we are planning to drop a column if it contains more than 80% null data.
 
 There are also a lot of outliers for each column, so we are planning to remove rows if they have an outlier.
 
