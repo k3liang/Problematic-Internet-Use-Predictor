@@ -33,8 +33,9 @@ answer: The graph comparing training and testing MSEs across alphas for Ridge Re
 ![Alt text](ridgeregression.png)
 
 ### Question: What are the next models you are thinking of and why?
-We are thinking of using polynonmial regression for the future because it would increase model complexity. This would prevent any potential underfitting.
- 
+We are thinking of using polynomial regression for the future because it would increase model complexity and would prevent any potential underfitting that often occurs with linear regression. Note that in polynomial regression we will only stick to degree 2 or 3, as higher degrees tend to lead to overfitting. If a degree 2 or 3 polynomial regression does not appear to be optimal, we will consider other non-polynomial regressions.
+
+We are also considering using support vector machines, since those are best used for classification models. In our case, a classification model is definitely worth considering since our only valid outputs are: 0, 1, 2, or 3. For the same reason, a Naive Bayes classifier is also worth considering.
 
 ### Question: What is the conclusion of your 1st model? What can be done to possibly improve it?
 The conclusion of our first model with ridge regression was that with an alpha of 1000, we had the most optimal cross validation value and lowest testing error. This value of alpha is quite high which indicates there is a severe penalty on the large coefficients or that there is a very strong "smoothing" effect on the regression coefficients to prevent overfitting. 
