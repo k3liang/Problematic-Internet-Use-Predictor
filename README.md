@@ -6,11 +6,12 @@ Download of the data can be done at this [Kaggle competition](https://www.kaggle
 Reference for using `pandas` on the cluster: [cudf.pandas](https://github.com/rapidsai/cudf)
 
 `EDA.ipynb`  
+`DataExploration.ipynb`  
 Exploratory Data Analysis step
 
-`DataPP.ipynb` (incomplete)  
+`DataPP.ipynb`
 Preprocessing Steps  
-*Note that we have gotten a little head start on the preprocessing for milestone 3 already, but here's our preprocessing plan/outline:*
+*Here's our preprocessing plan/outline from Milestone 2, which we implemented in Milestone 3*
 
 The dataset is strange in the fact that a lot of the measured values are 0 when they shouldn't be. A child that weighs 0 does not exist, so we assume that the data recorder put a 0 in some places when they should've put NaN. In other words, for some of the columns, we'll have to replace 0 with NaN.
 
@@ -27,6 +28,8 @@ Judging from the histograms of the data, most of the data is not normally distri
 Lastly, for the columns that contain seasonal data (which is categorical), we will use one hot encoding to transform the categorical data into numerical data. 
 
 Additionally in the `Data__time_series.ipynb` file, we performed preprocessing for the time series data, similar to our approach with the other dataset, but kept it separate to avoid conflicts. We began by inspecting the data for null values, finding none that required imputation. Next, we normalized the numerical columns and applied one-hot encoding to the categorical ones. Due to the dataset's size, which made it challenging to process locally, we randomly sampled a subset for initial preprocessing. However, we plan to use the full dataset later when running it on our models.
+
+## First Model : Linear Model With Lasso/Ridge Regularization
 
 ### Question: Where does our data fit in the fitting graph?
 answer: The graph comparing training and testing MSEs across alphas for Ridge Regression shows that the testing MSE is consistently higher than the training MSE, as expected. The training error decreases as alpha decreases, and at very low alpha values  (alpha < 10^-2 ), the training error becomes very low, indicating potential overfitting. Conversely, at very high alpha values, the training error increases, suggesting that the model is underfitting due to excessive regularization. The testing error initially decreases as alpha decreases but stabilizes at around alpha < 10^0. The best alpha is alpha = 1000, where the testing error is at its minimum, indicating the model generalizes well and achieves the optimal trade-off between bias and variance. In conclusion, the model fits best at alpha = 1000, as it minimizes the testing error and ensures strong generalization. 
