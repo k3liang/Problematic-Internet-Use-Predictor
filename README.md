@@ -1,8 +1,9 @@
-# Introduction
-Our project uses the Kaggle dataset provided by the Child Mind Institute - https://www.kaggle.com/competitions/child-mind-institute-problematic-internet-use/overview. The project centers around predicting whether or not a child has problematic internet use. To be more specific, the model will predict a person’s Severity Impairment Index (SII), an integer from 0 to 3, which is a number established by the Child Mind Institute to measure how excessive a person’s internet use is. The prediction will be based on multiple different measured information about the participant; features include demographics, physical measurements, fitness gram tests, and other assessment scores.
-We chose this topic because it tackles a highly relevant issue in today’s world, where constant internet activity has become deeply entrenched in daily life, often accompanied by reported mental health challenges, and thus many people may connect with this project and find the implications interesting or insightful as a result. A lot of times, you might hear about “iPad kids” that are always impulsively watching something on their electronic devices rather than engaging with the physical world, so it would be really cool if we could somehow classify problematic behavior, so that such behavior could be addressed early on.
-In particular, having a good predictive model of one’s SII based on several of their individual activities or attributes provides good insight into what combination of features is most associated with internet-related mental health challenges, and this information could be distributed to the general public, helping parents guide their children to adopting better lifestyle choices and habits and being more self-aware. Additionally, if a good predictive model is actually deployed, then perhaps parents could make use of the model as a check to the severity of their child’s internet use, and then use that information to make changes that steer the child away from their devices.
+# Introduction  
+Our project uses the Kaggle dataset provided by the Child Mind Institute - https://www.kaggle.com/competitions/child-mind-institute-problematic-internet-use/overview. The project centers around predicting whether or not a child has problematic internet use. To be more specific, the model will predict a person’s Severity Impairment Index (SII), an integer from 0 to 3, which is a number established by the Child Mind Institute to measure how excessive a person’s internet use is. The prediction will be based on multiple different measured information about the participant; features include demographics, physical measurements, fitness gram tests, and other assessment scores.  
+We chose this topic because it tackles a highly relevant issue in today’s world, where constant internet activity has become deeply entrenched in daily life, often accompanied by reported mental health challenges, and thus many people may connect with this project and find the implications interesting or insightful as a result. A lot of times, you might hear about “iPad kids” that are always impulsively watching something on their electronic devices rather than engaging with the physical world, so it would be really cool if we could somehow classify problematic behavior, so that such behavior could be addressed early on.  
+In particular, having a good predictive model of one’s SII based on several of their individual activities or attributes provides good insight into what combination of features is most associated with internet-related mental health challenges, and this information could be distributed to the general public, helping parents guide their children to adopting better lifestyle choices and habits and being more self-aware. Additionally, if a good predictive model is actually deployed, then perhaps parents could make use of the model as a check to the severity of their child’s internet use, and then use that information to make changes that steer the child away from their devices.  
 In the context of ML and our learning experience, this project was also very interesting in that the structure of the data as originally presented was very complex and even unusual; a lot of the data was actually missing values, which makes a little sense if you consider that some of the children participants were able to participate more than others (a 5 year old will be able to participate in less tests than a 12 year old, for instance). This will be addressed in the following sections.
+
 # Methods
 
 ## Data Exploration
@@ -48,11 +49,11 @@ Figure 5: Correlation coefficients for a list of some of the features in compari
 
 ## Data Preprocessing
 *Code for the preprocessing part can be found in `DataPP.ipynb`*
-For our preprocessing steps we first had to deal with the fact that the dataset had a lot of 0 measured values when they should not be. For example, there exist child weights in the dataset that are 0; of course this is physically impossible, so we assume that the data recorder puts a 0 in some places to indicate missing data. Thus first we replaced the 0’s for these physical measurement columns with NaN values (to represent that the value is missing rather than being represented as 0, which will affect scaling).
-It is also worthy to note that the dataset contains some null values in almost every row, thus if we just decided to drop all rows with any null values, the entire dataset gets dropped. 
+For our preprocessing steps we first had to deal with the fact that the dataset had a lot of 0 measured values when they should not be. For example, there exist child weights in the dataset that are 0; of course this is physically impossible, so we assume that the data recorder puts a 0 in some places to indicate missing data. Thus first we replaced the 0’s for these physical measurement columns with NaN values (to represent that the value is missing rather than being represented as 0, which will affect scaling).  
+It is also worthy to note that the dataset contains some null values in almost every row, thus if we just decided to drop all rows with any null values, the entire dataset gets dropped.   
 However, to help reduce the number of missing values a little bit we dropped some of the columns/features if the column contains more than 80% null data. The reasoning is that if a column has so little data (only for a few participants), it won’t be extremely useful for predictions for our project’s circumstances.
-We then also had a lot of data that looked extreme, or seemed to be outliers, and of course we had to remove these. We tried to first define outliers as any piece of data with an absolute z-score of greater than 3; however the data still seemed mostly skewed so we decided to do a different route. We then tried to define outliers based on interquartile range (IQR). We defined an outlier to be any piece of data less than Q1 - (1.5 * IQR) or any piece of data greater than (Q3 + 1.5*IQR) (this is standard statistics practice). But removing these pieces of data would remove 20% of our data (and we don’t have that many rows, so we probably want to remove less), so we settled on adjusting the outliers to be anything less than (Q1 - 2.5 *IQR) or greater than (Q3 + 2.5 * IQR), this accounted for 7% of our data being outliers.
-After removing our outliers we then had to impute the remaining NaN values in our columns. We did this by imputing our NaN values with random values from the same column. We did this because imputing based on random values in the same column helps us maintain the distribution of our data somewhat, but perhaps better imputing methods could be considered if we had more time. 
+We then also had a lot of data that looked extreme, or seemed to be outliers, and of course we had to remove these. We tried to first define outliers as any piece of data with an absolute z-score of greater than 3; however the data still seemed mostly skewed so we decided to do a different route. We then tried to define outliers based on interquartile range (IQR). We defined an outlier to be any piece of data less than Q1 - (1.5 * IQR) or any piece of data greater than (Q3 + 1.5*IQR) (this is standard statistics practice). But removing these pieces of data would remove 20% of our data (and we don’t have that many rows, so we probably want to remove less), so we settled on adjusting the outliers to be anything less than (Q1 - 2.5 *IQR) or greater than (Q3 + 2.5 * IQR), this accounted for 7% of our data being outliers.  
+After removing our outliers we then had to impute the remaining NaN values in our columns. We did this by imputing our NaN values with random values from the same column. We did this because imputing based on random values in the same column helps us maintain the distribution of our data somewhat, but perhaps better imputing methods could be considered if we had more time.   
 Next we made sure to encode the categorical season features as numbers by doing one-hot-encoding.
 Finally, we did a scaling of our features. Looking back at our EDA graphs we can also see that most of our data is not normally distributed, so to account for this we used min-max normalization to normalize all the quantitative features of our data to be between 0 and 1. 
 
@@ -61,12 +62,12 @@ Additionally, it should be noted that the Kaggle dataset also included some time
 
 
 ## Model 1 - Linear Regression
-(*Code for the linear model can be found in `Models.ipynb`*)
+(*Code for the linear model can be found in `Models.ipynb`*)  
 For our first model, we explored Lasso and Ridge regression where we performed hyperparameter tuning (the hyperparameter we are tuning is the regularization strength, denoted by `alpha` in `sklearn`). We ran a loop (grid search), iterating the alpha of both models using values from 10^-7 to 10^*7 (log scale iteration), and we found that the most optimal alpha value for Ridge (L2 regularization) was 100 with a `cross_val` value of 10.525 while the most optimal alpha value of lasso (L1 regularization) was 0.001 with a crossval of 10.047. Since the ridge model produced a higher cross validation score value (indicating better generalizable performance), we further examined the fitting graph of the ridge regression model, generating it with the alpha value on the x-axis (to represent model complexity), and the corresponding train and test MSE values on the y-axis to represent model performance. In the fitting graph, we plotted the train and test mse on the y-axis and their associated alpha hyperparameter on the x-axis. To make it so that the positive x-direction meant an increase in model complexity, we had to put the alphas in decreasing order on the x-axis (since smaller alpha means an increase in model complexity). The fitting graph and results are shown in the results section.
 
 ## Model 2 - Random Forest Regression 
 
-(*Code for the second model can be found in `Model2.ipynb`*)
+(*Code for the second model can be found in `Model2.ipynb`*)  
 For our second model, we first had to decide what model we wanted to tune. If you quickly skim `Model2.ipynb`, you will see that we investigated many different models to get a gist of which ones worked well and which didn't. Eventually, we settled on the Random Forest Regression model (which you can see somewhere in the middle of the notebook), because it did surprisingly well without much hyperparameter tuning initially. Before any rigorous hyperparameter tuning, we were able to get it down to a train MSE of 0.3539249959567035 and a test MSE of 0.4337570258421322, which is not bad, considering our labels go from 0 to 3. Of course, our next line of action was to tune the model and avoid overfitting.
 
 Like in the first model, we could make a fitting graph as shown in the lecture. This is because the ccp_alpha hyperparameter of Random Forest Regression is a hyperparameter that we can tune. As stated in the `sklearn` documentation, the ccp_alpha hyperparameter is a "complexity parameter used for Minimal Cost-Complexity Pruning," where 0 means no pruning occurs (and the model is complex). In contrast, higher values mean more pruning occurs (and the model is simpler). We ran a for loop trying out different values, and we kept narrowing down the range of the ccp_alpha hyperparameter to find the smallest possible test error. We then were able to make a fitting graph plotting this process. The fitting graph will be shown in the `Results` section. For extra clarification: to make the fitting graph we plotted the `ccp_alpha` against both our training and testing MSEs for each `ccp_alpha` value that we grid searched. To make it so that the positive x-direction meant an increase in model complexity, we had to put the ccp_alphas in decreasing order on the x-axis (since smaller ccp_alpha means an increase in model complexity). We also log-scaled the x-axis to make the graph look cleaner.
@@ -76,10 +77,10 @@ The resulting fitting graph and other results will be shown in the **Results** s
 
 # Results
 
-Ridge Linear Regression
-Best alpha = 100
-Train MSE: 0.502110725859142
-Test MSE: 0.5021137440264308
+Ridge Linear Regression  
+Best alpha = 100  
+Train MSE: 0.502110725859142  
+Test MSE: 0.5021137440264308  
 
 After tuning our ridge linear regression, our optimal alpha value was 100 which produced a train and test mse of 0.502110 and 0.50213 respectively. 
 
@@ -88,14 +89,14 @@ After tuning our ridge linear regression, our optimal alpha value was 100 which 
 Figure 6: Fitting graph showing model performance vs model complexity for a Ridge Regression model. Model complexity is defined by the `alpha` hyperparameter, which determines the regularization strength of the L2 norm of the weights in the model’s loss function.
 
 
-Initial Random Forest Regression:
-Train MSE: 0.3539249959567035
-Test MSE: 0.4337570258421322
+Initial Random Forest Regression:  
+Train MSE: 0.3539249959567035  
+Test MSE: 0.4337570258421322  
 
-Hyperparameter Tuning on Random Forest Regression:
-Best alpha: 0.019
-Train MSE: 0.25471415645593276
-Test MSE: 0.43011595444396405
+Hyperparameter Tuning on Random Forest Regression:  
+Best alpha: 0.019  
+Train MSE: 0.25471415645593276  
+Test MSE: 0.43011595444396405  
 
 ![](cse151figs/fig7.png)
 
