@@ -15,7 +15,7 @@ We did some basic data exploration of the training set to get a sense of the str
 
 ![](cse151figs/fig1a.png) ![](cse151figs/fig1b.png)
 
-Figure 1: A preview of the raw dataset (left image), as well as the types of the features (right image)
+Figure 1: A preview of the raw dataset (top image), as well as the types of the features (bottom image)
 
 We also investigated the missing values in our dataset, and we found that almost half of the dataset was missing values (which is something we’ll have to address in the preprocessing section). Every row has a missing value, so it’s not like we can just simply drop all rows that have a missing value.
 We also investigated potential outliers in our dataset. We found that a lot of the columns had a minimum value of zero, which didn’t make any sense for some of the columns (0 weight does not make any sense). We’ll have to consider this in the preprocessing section. 
