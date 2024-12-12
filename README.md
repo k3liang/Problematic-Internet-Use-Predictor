@@ -10,7 +10,7 @@ In the context of ML and our learning experience, this project was also very int
 
 *Data Exploration code can be found in both `DataExploration.ipynb` and `EDA.ipynb`. To make things more organized, we separated the explanation of these files into two subsections.*
 
-`EDA.ipynb`
+`EDA.ipynb`  
 We did some basic data exploration of the training set to get a sense of the structure. We got a sense of the size and types of the data: there were 82 different features and 3960 different observations, and while the majority of the 82 features were numerical data – like “weight,” “height,” or “age,” for instance – some of them were of type “object” (ie strings, which are categorical information), but actually, the only string categorical information in this dataset was season data (Fall, Winter, Summer, Spring). We decided this would require one-hot-encoding in the preprocessing step (which will be talked about in the Preprocessing section).
 
 ![](cse151figs/fig1.png)
@@ -48,7 +48,7 @@ Wanting to find the feature with the highest correlation coefficient from which 
 Figure 5: Correlation coefficients for a list of some of the features in comparison to the `sii` value, with an emphasis on the particularly high value of correlation between sleep disturbance and severe internet use.
 
 ## Data Preprocessing
-*Code for the preprocessing part can be found in `DataPP.ipynb`*
+*Code for the preprocessing part can be found in `DataPP.ipynb`*  
 For our preprocessing steps we first had to deal with the fact that the dataset had a lot of 0 measured values when they should not be. For example, there exist child weights in the dataset that are 0; of course this is physically impossible, so we assume that the data recorder puts a 0 in some places to indicate missing data. Thus first we replaced the 0’s for these physical measurement columns with NaN values (to represent that the value is missing rather than being represented as 0, which will affect scaling).  
 It is also worthy to note that the dataset contains some null values in almost every row, thus if we just decided to drop all rows with any null values, the entire dataset gets dropped.   
 However, to help reduce the number of missing values a little bit we dropped some of the columns/features if the column contains more than 80% null data. The reasoning is that if a column has so little data (only for a few participants), it won’t be extremely useful for predictions for our project’s circumstances.
