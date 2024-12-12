@@ -13,7 +13,7 @@ In the context of ML and our learning experience, this project was also very int
 `EDA.ipynb`  
 We did some basic data exploration of the training set to get a sense of the structure. We got a sense of the size and types of the data: there were 82 different features and 3960 different observations, and while the majority of the 82 features were numerical data – like “weight,” “height,” or “age,” for instance – some of them were of type “object” (ie strings, which are categorical information), but actually, the only string categorical information in this dataset was season data (Fall, Winter, Summer, Spring). We decided this would require one-hot-encoding in the preprocessing step (which will be talked about in the Preprocessing section).
 
-![](cse151figs/fig1.png)
+![](cse151figs/fig1a.png) ![](cse151figs/fig1b.png)
 
 Figure 1: A preview of the raw dataset (left image), as well as the types of the features (right image)
 
