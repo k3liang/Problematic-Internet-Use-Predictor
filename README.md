@@ -12,6 +12,7 @@ In the context of ML and our learning experience, this project was also very int
 `EDA.ipynb`
 We did some basic data exploration of the training set to get a sense of the structure. We got a sense of the size and types of the data: there were 82 different features and 3960 different observations, and while the majority of the 82 features were numerical data – like “weight,” “height,” or “age,” for instance – some of them were of type “object” (ie strings, which are categorical information), but actually, the only string categorical information in this dataset was season data (Fall, Winter, Summer, Spring). We decided this would require one-hot-encoding in the preprocessing step (which will be talked about in the Preprocessing section).
 
+![](cse151figs/fig1.png)
 
 Figure 1: A preview of the raw dataset (left image), as well as the types of the features (right image)
 
@@ -22,20 +23,26 @@ We also investigated potential outliers in our dataset. We found that a lot of t
 After this, we tried to find a relationship between the target SII and some other features via a scatter plot. We did this with “Physical-BMI,” “Basic-Demos-Age,” “CGAS-CGAS_Score,” and “Physical-Weight.” Unfortunately, the scatter plots did not yield any obvious relationship between SII and these other features at first glance. In each of these graphs, however, the points were far more dense for the SII values of 2,1,or 0 than they were for 3, which led us to check for the frequency of each value within the data. After plotting a histogram, it was, surely enough, clear that the index of 3 had a much lower frequency than any other index, and that the index of 0 had a much higher frequency than any other index. This shows that most of the subjects of the training data did not have any significant impairment from internet use, while only a small minority had the most severe such impairment. 
 
 
+![](cse151figs/fig2.png)
+
 Figure 2: Frequency distribution of SII (severity impairment index) values, indicating that most of the participants were not excessive internet users
 
 After the scatter plots and the histogram, we then decided to use box plots to compare the spread of the data among four different features: “PCIAT_Total,” “CGAS-CGAS_Score,” “Physical-Height,” and of course “SII.” In order to compare them effectively side by side, we used min-max scaling. From this plot, it was clear that the SII index value of 3.0 was so infrequent that it was considered an outlier – the boxplot method can detect outliers by their frequency, and denotes it on the graph as a circle that is detached from the boxplot itself. Additionally, the CGAS-CGAS_Score variable had an outlier that was so disproportionately higher than the rest of the data that the boxplot for this feature was excessively compressed. 
 
+![](cse151figs/fig3.png)
 
 Figure 3: Box plots for the values of `PCIAT-PCIAT_Total` (child internet addiction test scores), `CGAS-CGAS_Score` (“children’s global assessment score”), `Physical Height`, `sii` (severity impairment index)
 
 We then plotted a heatmap with these four features, including SII; the highest correlation coefficient less than 1 with respect to SII (which is displayed between a feature and itself) was 0.9, from PCIAT-Total. 0.9 is an unusually high correlation, so we were skeptical of this result. It turned out that the SII index was directly determined by the PCIAT-Total (we found this out after more deeply investigating the Kaggle dataset description). In particular, the Kaggle dataset description described that for a PCIAT value between 0 and 30, the SII was 0.0; for a value between 30 and 50, the SII was 1.0; for a value between 50 and 80, the SII was 2.0, and for a value higher than 80 the SII was 3.0 (this can be further demonstrated by a scatter plot of the `sii` vs the `PCIAT-PCIAT_Total`). 
 
 
+![](cse151figs/fig4.png)
+
 Figure 4: Scatterplot of `sii` vs `PCIAT-PCIAT_Total`, demonstrating that `sii` is actually a calculation based on the PCIAT test score
 
 Wanting to find the feature with the highest correlation coefficient from which the SII was not so directly derived, we first dropped the rest of the PCIAT columns so that the same problem would not occur, and created a correlation matrix. After printing out the ‘SII’ column of this matrix, we noticed that the feature with the highest correlation coefficient was SDS-SDS-Total_Raw, with 0.755. This is not at all a low correlation coefficient, and the ‘SII’ index was not directly derived from this feature, so this is an insightful result. *The `SDS-SDS-Total_Raw` score is the sleep disturbance scale score for the participant, which makes sense; if a participant is more heavily using the internet, they’re more severely impacting their sleep.*
 
+![](cse151figs/fig5.png)
 
 Figure 5: Correlation coefficients for a list of some of the features in comparison to the `sii` value, with an emphasis on the particularly high value of correlation between sleep disturbance and severe internet use.
 
@@ -76,6 +83,7 @@ Test MSE: 0.5021137440264308
 
 After tuning our ridge linear regression, our optimal alpha value was 100 which produced a train and test mse of 0.502110 and 0.50213 respectively. 
 
+![](cse151figs/fig6.png)
 
 Figure 6: Fitting graph showing model performance vs model complexity for a Ridge Regression model. Model complexity is defined by the `alpha` hyperparameter, which determines the regularization strength of the L2 norm of the weights in the model’s loss function.
 
@@ -89,6 +97,7 @@ Best alpha: 0.019
 Train MSE: 0.25471415645593276
 Test MSE: 0.43011595444396405
 
+![](cse151figs/fig7.png)
 
 Figure 7: Fitting graph showing model performance vs model complexity for a Random Forest Regression Model. Model complexity is defined by the `ccp_alpha` value, which determines how much pruning is done on the decision tree. 
 
